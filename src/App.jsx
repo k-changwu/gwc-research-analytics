@@ -1,9 +1,9 @@
 import Quiz from "./Quiz";
-
+import { jsQuiz } from "./constants";
 
 function App() {
   return (
-    <Quiz/>
+    <Quiz questions = {jsQuiz.questions} />
   );
 }
 
