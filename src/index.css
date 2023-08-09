@@ -9,7 +9,7 @@ dark blue #01426a
 */
 
 body{
-    font-family: monospace;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background: linear-gradient(180deg, #6eceb2 0.05%, #01426a);
     color: #000000; 
     display: flex;
@@ -17,28 +17,60 @@ body{
     margin: 0 auto;
     padding: 0 30px;
     height: 100vh;
+   
+    
 
 }
 .quiz-container{
     width: 500px;
-    height: 500px; 
-    background: #e7e8e9; 
-    border-radius: 4px;
+    background: #ffffff; 
+    border-radius: 8px;
     margin-top: 100px;
-    padding: 30px, 60px; 
+  
+    padding: 30px 60px; 
     box-sizing: border-box; 
 
     .active-question-no{
         font-size: 32px; 
         font-weight: 500; 
-        color: #01426a
+        color: #01426a;
+        display: inline-block;
+     
+    };
 
-    }; 
+
     .total-question{
         font-size:16px;
         font-weight: 500;
         color: #9c9c9c; 
     };
+
+    h2{
+        font-size: 20px;
+        font-weight: lighter;
+        margin: 0;
+
+    }
+
+    ul {
+        margin-top: 20px;
+        margin-left: -40px;
+        list-style: none;
+        padding: 0;
+    }
+    
+    ul li {
+        text-decoration: none;
+       
+        color: #000000;
+        font-size: 16px;
+        border: 1px solid #000000;
+        border-radius: 16px;
+        padding: 11px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+   
 
 }
 
