@@ -3,6 +3,7 @@ primary: #6eceb2  mint green
 accent: #ece81a   yellow
 bg: #ffffff
 bg accent: #f4364c red
+light gray: #e7e8e9
 disabled: #9c9c9c gray
 foregrouund: #000000  black
 dark blue #01426a
@@ -17,18 +18,19 @@ body{
     margin: 0 auto;
     padding: 0 30px;
     height: 100vh;
-   
-    
+    list-style: none;
+    list-style-type: none;  
 
 }
 .quiz-container{
     width: 500px;
     background: #ffffff; 
-    border-radius: 8px;
+    border-radius: 20px;
     margin-top: 100px;
   
     padding: 30px 60px; 
     box-sizing: border-box; 
+}
 
     .active-question-no{
         font-size: 32px; 
@@ -50,28 +52,42 @@ body{
         font-weight: lighter;
         margin: 0;
 
-    }
+    };
 
-    ul {
+    ul{
         margin-top: 20px;
         margin-left: -40px;
         list-style: none;
-        padding: 0;
-    }
+        list-style-type: none;
     
-    ul li {
-        text-decoration: none;
        
-        color: #000000;
-        font-size: 16px;
+    }
+
+    li{
+        text-decoration: none;
         border: 1px solid #000000;
-        border-radius: 16px;
+        background: #e7e8e9;
+        font-size: 16 px;
+        list-style: none;
         padding: 11px;
         margin-top: 15px;
         cursor: pointer;
+        border-radius: 2px;
+
     }
+    
+
+
+    
+ 
    
 
-}
+
+
+
+
+    
+ 
+   
 
 
