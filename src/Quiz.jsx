@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./index.css";
+import logo from './images/logo-mint.png';
 
 
 
@@ -23,11 +24,12 @@ const Quiz = ({questions}) => {
 
     return  (
         <div className = "quiz-container" >
+            <img src = {logo} alt= "Logo" className="Logo"/>
         <>
         <span className = "active-question-no">{currentQuestion + 1}</span>
         <span className = "total-question">/{questions.length}</span>
         <h2>{question} </h2>
-        <ul style = {{ listStyle: 'none', padding: 0, listStyleType: 'none'}}>
+        <ul style = {{ marginTop: 20, padding: 0, listStyleType: 'none'}}>
             { 
                 choices.map((answer, index) => (
                     <li

@@ -7,11 +7,22 @@ light gray: #e7e8e9
 disabled: #9c9c9c gray
 foregrouund: #000000  black
 dark blue #01426a
+
+look into hosting
+add logo
+add title 
+
 */
 
+@font-face{
+    font-family: 'RobotoRegular';
+    src: url('./fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+
 body{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: linear-gradient(180deg, #6eceb2 0.05%, #01426a);
+    font-family: RobotoRegular;
+    background: linear-gradient(180deg, #6eceb2 40%, #01426a);
     color: #000000; 
     display: flex;
     justify-content: center;
@@ -26,11 +37,25 @@ body{
     width: 500px;
     background: #ffffff; 
     border-radius: 20px;
-    margin-top: 100px;
+    margin-top: 200px;
   
-    padding: 30px 60px; 
+    padding: 40px 60px; 
     box-sizing: border-box; 
 }
+
+
+.Logo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 100px;
+    padding: 5px 10px;
+    
+
+}
+
+
 
     .active-question-no{
         font-size: 32px; 
@@ -65,16 +90,22 @@ body{
 
     li{
         text-decoration: none;
-        border: 1px solid #000000;
+        border: 1px solid #e6e8e9;
         background: #e7e8e9;
         font-size: 16 px;
         list-style: none;
-        padding: 11px;
+        padding: 15px;
         margin-top: 15px;
         cursor: pointer;
-        border-radius: 2px;
+        border-radius: 16px;
 
     }
+
+.selected-answer{
+    border: 1px solid #000000;
+    color: #01426a;
+    background: #6eceb2;
+}
     
 
 
