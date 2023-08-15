@@ -117,8 +117,20 @@ li{
 
 .footer{
     display: flex; 
-    justify-content: flex-end;
+    justify-content: space-between;
 }
+.back-button{
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 42px;
+    outline: none;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+    background: #e6e8e9;
+
+}
+
 button{
     border-radius: 10px;
     font-size: 18px;
@@ -129,6 +141,7 @@ button{
     cursor: pointer;
     background: #6eceb2;
 }
+
     
 :disabled{
     color: #000000;

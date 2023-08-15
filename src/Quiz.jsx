@@ -35,6 +35,12 @@ const Quiz = ({questions}) => {
 
 
     }
+    const onClickBack = () => {
+        setAnswerIdx(null);
+        if (currentQuestion > 0) {
+            setCurrentQuestion(currentQuestion -  1);
+        }
+    }
     const onStartQuiz = () => {
         setQuizStarted(true);
         setAnswerIdx(null); 
@@ -77,7 +83,10 @@ const Quiz = ({questions}) => {
                         ))}
                 </ul>
                 <div className = "footer">
-                   
+                <button className = "back-button" onClick ={onClickBack}>
+                    Back
+
+                    </button>
                     <button
                         onClick={onClickNext} 
                  
@@ -85,6 +94,7 @@ const Quiz = ({questions}) => {
                             >
                     {currentQuestion === questions.length - 1 ? 'Finish' : 'Next'}
                     </button>
+                    
                 </div>
                 </>
                 ) : <div className = "result">
