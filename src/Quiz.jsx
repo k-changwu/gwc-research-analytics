@@ -89,8 +89,19 @@ const Quiz = ({questions}) => {
                 </>
                 ) : <div className = "result">
                     <h3>Result</h3>
-                    {result === 'salesforce' ? (<p>Salesforce<br></br>Based on your responses, you should create a Salesforce Report!</p>)
-                     : (<p>Tableau <br></br>Based on your responses, you should create a Tableau Dashboard!</p>)}
+                    {result === 'salesforce' ? (
+                        <div>
+                    <p className = "result-heading" > Salesforce</p> 
+                    <p> Based on your responses, you should create a Salesforce Report!</p>
+                    </div>
+                    
+                    ) : (
+                    <div>
+                     <p className = "result-heading">Tableau</p> 
+                    <p>Based on your responses, you should create a Tableau Dashboard!</p>
+                    </div>
+                    )
+                    }
            
                     
                     <button onClick = {onTryAgain}>

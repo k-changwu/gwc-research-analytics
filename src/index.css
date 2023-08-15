@@ -146,12 +146,28 @@ button{
 
 .result{
     text-align: center;
+    line-height: 1.2;
 
 }
     
 .result h3{
-    font-size: 24px;
+    font-size: 25px;
     letter-spacing: 1.2px;
+    text-align: center;
+}
+
+.result-heading{
+    font-size: 40px !important;
+    font-weight: 350;
+    color: #01426a;
+    text-align: center;
+    
+    
+
+}
+.result p{
+    font-size: 20px;
+    font-weight: 200;
     text-align: center;
 }
 
