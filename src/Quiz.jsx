@@ -2,53 +2,64 @@ import { useState, useEffect } from "react";
 import "./index.css";
 import logo from './images/logo-mint.png';
 import { resultInitialState } from "./constants";
+import { jsQuiz} from "./constants";
 
 
 
 const Quiz = ({questions}) => {
     const[currentQuestion, setCurrentQuestion] = useState(0);
-    const {question, choices} = questions[currentQuestion];
+    const {question, choices, leadsToResult, nextQuestionYes, nextQuestionNo} = questions[currentQuestion];
     const [answerIdx, setAnswerIdx] = useState(null); /* answerIndx = index of the choice selected */
-    const [answer, setAnswer] = useState(null);
+    //const [answer, setAnswer] = useState(null);
     const [quizStarted, setQuizStarted] = useState(false);
-    const  [result, setResult] = useState(resultInitialState)
-
+    const  [result, setResult] = useState(null);
     const [showResult, setShowResult] = useState(false);
  
-    const onAnswerClick = (answer, index) => {
+    const onAnswerClick = (index) => {
         setAnswerIdx(index);
-        if (answer === "Yes") {
-            setAnswer(true);
-
-        }else{
-            setAnswer(false);
     }
-}
     const onClickNext = () => {
-        setAnswerIdx(null);
-        if (currentQuestion !== questions.length - 1) {
-            setCurrentQuestion((prev) => prev + 1);
-        }else{
-            setCurrentQuestion(0);
-            setShowResult(true);
+        const selectedChoice = choices[answerIdx];
+        if(selectedChoice === "Yes") {
+            if (leadsToResult) {
+                setShowResult(true);
+                setResult(leadsToResult);
+            }else{
+                setCurrentQuestion(nextQuestionYes);
+            }
+        } else if (selectedChoice === "No"){
+            if (nextQuestionNo !== undefined) {
+                setCurrentQuestion(nextQuestionNo);
+            }else {
+                setShowResult(true);
+                setResult(leadsToResult);
+            }
         }
+        setAnswerIdx(null);
+       
 
 
     }
     const onClickBack = () => {
-        setAnswerIdx(null);
         if (currentQuestion > 0) {
             setCurrentQuestion(currentQuestion -  1);
         }
+        setAnswerIdx(null);
+       
     }
     const onStartQuiz = () => {
         setQuizStarted(true);
         setAnswerIdx(null); 
+        setShowResult(false);
+        setResult(null);
+        setCurrentQuestion(0);
     };
 
     const onTryAgain = () => {
         setResult(resultInitialState);
         setShowResult(false);
+        setCurrentQuestion(0);
+        setAnswerIdx(null);
     }
     
 
@@ -63,30 +74,29 @@ const Quiz = ({questions}) => {
             {quizStarted ? (
             !showResult ? (
                 <>
-
-                <span className = "active-question-no">{currentQuestion + 1}</span>
-                <span className = "total-question">/{questions.length}</span>
+                {/* <span className = "active-question-no">{currentQuestion + 1}</span>
+                <span className = "total-question">/{questions.length}</span> */}
                 <h2>{question} </h2>
                 <ul style = {{ marginTop: 20, padding: 0, listStyleType: 'none'}}>
                     { 
                         choices.map((answer, index) => (
                             <li
-                                onClick={() => onAnswerClick(answer, index)}
+                                onClick={() => onAnswerClick(index)}
                                 key = {answer}
-                                className = {answerIdx === index ? "selected-answer" : null}
-                                
+                                className = {answerIdx === index ? "selected-answer" : null}   
                             >
                                 {answer}                  
-                             </li>
-                            
-                             
+                             </li> 
                         ))}
                 </ul>
                 <div className = "footer">
-                <button className = "back-button" onClick ={onClickBack}>
+                  {currentQuestion !== 0 && (
+                   <button className = "back-button" onClick ={onClickBack}>
                     Back
 
                     </button>
+                    )}
+
                     <button
                         onClick={onClickNext} 
                  
@@ -112,8 +122,6 @@ const Quiz = ({questions}) => {
                     </div>
                     )
                     }
-           
-                    
                     <button onClick = {onTryAgain}>
                         Start Again
                     </button>

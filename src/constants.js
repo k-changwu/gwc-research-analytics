@@ -6,14 +6,10 @@ export const jsQuiz = {
                 "Yes", // SF 
                 "No",
             ], 
-            next: [
-                
-
-            ],
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            leadsToResult: "salesforce",
+            nextQuestionNo: 1,
+            
+        
             
         },
         {
@@ -22,10 +18,9 @@ export const jsQuiz = {
                 "Yes", 
                 "No",
             ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            nextQuestionYes: 2, 
+            nextQuestionNo: 3,
+           
             
         },
         {
@@ -34,61 +29,44 @@ export const jsQuiz = {
                 "Yes", // SF
                 "No",
             ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            leadsToResult: "salesforce",
+            nextQuestionNo: 3,
+         
             
         },
         {
-            question: "Are there two sources of data on Salesforce?", // 4
+            question: "Are all data sources available in Salesforce?", // 4
             choices: [
                 "Yes", // SF
                 "No",
             ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            leadsToResult: "salesforce",
+            nextQuestionNo: 4,
             
         },
         {
-            question: "Are both data sources available in Salesforce?", // 5
+            question: "Are the data sources available in Tableau and the Data Warehouse?", // 5
             choices: [
                 "Yes", // SF
                 "No",
             ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            leadsToResult: "tableau",
+            nextQuestionNo: 5
+          
             
         },
         {
-            question: "Are the data sources available in Tableau and the Data Warehouse?", // 6
+            question: "Is there a Tableau Data Connector for the data source(s)?", // 6
             choices: [
                 "Yes", // Tb 
                 "No",
             ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
+            leadsToResult: "tableau",
+
+      
             
         },
-        {
-            question: "Are there more than two sources of data?", // 7
-            choices: [
-                "Yes", // Tb
-                "No",
-            ], 
-            points: {
-                "Yes" : 0,
-                "No" : 0,
-            }
-            
-        },
-     
+        
       
     ]
 };
