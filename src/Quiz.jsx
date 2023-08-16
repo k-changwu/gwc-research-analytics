@@ -3,6 +3,7 @@ import "./index.css";
 import logo from './images/logo-mint.png';
 import { resultInitialState } from "./constants";
 import { jsQuiz} from "./constants";
+import { pointBasedQuestions } from "./constants";
 
 
 
@@ -10,36 +11,32 @@ const Quiz = ({questions}) => {
     const[currentQuestion, setCurrentQuestion] = useState(0);
     const {question, choices, leadsToResult, nextQuestionYes, nextQuestionNo} = questions[currentQuestion];
     const [answerIdx, setAnswerIdx] = useState(null); /* answerIndx = index of the choice selected */
-    //const [answer, setAnswer] = useState(null);
+    
     const [quizStarted, setQuizStarted] = useState(false);
     const  [result, setResult] = useState(null);
     const [showResult, setShowResult] = useState(false);
+
+    const [isPointQuizStarted, setPointQuizStarted] = useState(false);
+    const [pointQuizResult, setPointQuizResult] = useState(null);
+    const [pointQuizQuestion, setPointQuizQuestion] = useState(0);
+    const [resultPoints, setResultPoints] = useState({tableau: 0, salesforce: 0});
+
+    const [tableauTotalPoints, setTableauPoints] = useState(0);
+    const [salesforceTotalPoints, setSalesforcePoints] = useState(0);
+
+    
+
+    const initialResultPoints = {
+        salesforce: 0,
+        tableau: 0,
+    }
  
     const onAnswerClick = (index) => {
         setAnswerIdx(index);
     }
-    const onClickNext = () => {
-        const selectedChoice = choices[answerIdx];
-        if(selectedChoice === "Yes") {
-            if (leadsToResult) {
-                setShowResult(true);
-                setResult(leadsToResult);
-            }else{
-                setCurrentQuestion(nextQuestionYes);
-            }
-        } else if (selectedChoice === "No"){
-            if (nextQuestionNo !== undefined) {
-                setCurrentQuestion(nextQuestionNo);
-            }else {
-                setShowResult(true);
-                setResult(leadsToResult);
-            }
-        }
-        setAnswerIdx(null);
-       
-
-
-    }
+    
+    
+    
     const onClickBack = () => {
         if (currentQuestion > 0) {
             setCurrentQuestion(currentQuestion -  1);
@@ -53,12 +50,72 @@ const Quiz = ({questions}) => {
         setShowResult(false);
         setResult(null);
         setCurrentQuestion(0);
-    };
+        setPointQuizStarted(false);
+    }
 
     const onTryAgain = () => {
         setResult(resultInitialState);
         setShowResult(false);
         setCurrentQuestion(0);
+        setAnswerIdx(null);
+        setResultPoints({tableau: 0, salesforce: 0});
+        setPointQuizStarted(false);
+        setPointQuizResult(null);
+    }
+    
+    
+    const onClickNext = () => {
+        const selectedChoice = choices[answerIdx];
+    
+        if (selectedChoice === "Yes") {
+            if (leadsToResult) {
+                setShowResult(true);
+                setResult(leadsToResult);
+            } else {
+                setCurrentQuestion(nextQuestionYes);
+            }
+   
+        } else if (selectedChoice === "No") {
+            if (nextQuestionNo !== undefined) {
+                setCurrentQuestion(nextQuestionNo);
+            } else {
+                if (currentQuestion === questions.length - 1) {
+                    setPointQuizStarted(true);
+                    setPointQuizResult(null);
+                    setPointQuizQuestion(0);
+                } else {
+    
+                    setShowResult(true);
+                    setResult(leadsToResult);
+                    
+                }
+            }
+        }
+        setAnswerIdx(null);
+    }
+
+    const onClickNextPointQuiz = () => {
+        
+        const selectedChoice = pointBasedQuestions.questions[pointQuizQuestion].choices[answerIdx];
+
+        if (selectedChoice.result === "tableau") {
+            setTableauPoints(tableauTotalPoints + 1);
+        }else if (selectedChoice.result === "salesforce") {
+            setSalesforcePoints(salesforceTotalPoints + 1);
+        }
+
+    
+        if (pointQuizQuestion === pointBasedQuestions.questions.length - 1) {
+            if (tableauTotalPoints > salesforceTotalPoints) {
+                setResult("tableau");
+            }else if (tableauTotalPoints < salesforceTotalPoints) {
+                setResult("salesforce");
+            }
+            setShowResult(true);
+            
+        }
+        setPointQuizQuestion(pointQuizQuestion + 1);
+    
         setAnswerIdx(null);
     }
     
@@ -68,14 +125,41 @@ const Quiz = ({questions}) => {
     return  (
         <div>
        
-        <div className = "quiz-container" >
+        <div className="quiz-container" >
         
         <img src = {logo} alt= "Logo" className="Logo"/>
             {quizStarted ? (
-            !showResult ? (
+            !showResult ? (          
+                isPointQuizStarted ? (
+                // render scoring questions
+                <div className="point-quiz">
+                  <h2>{pointBasedQuestions.questions[pointQuizQuestion].question}</h2>
+                  <ul style={{ marginTop: 20, padding: 0, listStyleType: 'none' }}>
+                    {pointBasedQuestions.questions[pointQuizQuestion].choices.map((choice, index) => (
+                      <li
+                        onClick={() => onAnswerClick(index)}
+                        key={choice.text}
+                        className={answerIdx === index ? 'selected-answer' : null}
+                      >
+                        {choice.text}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="footer">
+                    {/* {pointQuizQuestion !== 0 && (
+                      <button className="back-button" onClick={onClickBackPoints}>
+                        Back
+                      </button>
+                    )} */}
+    
+                    <button onClick={onClickNextPointQuiz} disabled={answerIdx === null}>
+                      {pointQuizQuestion === pointBasedQuestions.questions.length - 1 ? 'Finish' : 'Next'}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                // render regular questions
                 <>
-                {/* <span className = "active-question-no">{currentQuestion + 1}</span>
-                <span className = "total-question">/{questions.length}</span> */}
                 <h2>{question} </h2>
                 <ul style = {{ marginTop: 20, padding: 0, listStyleType: 'none'}}>
                     { 
@@ -93,7 +177,6 @@ const Quiz = ({questions}) => {
                   {currentQuestion !== 0 && (
                    <button className = "back-button" onClick ={onClickBack}>
                     Back
-
                     </button>
                     )}
 
@@ -102,12 +185,14 @@ const Quiz = ({questions}) => {
                  
                                 disabled={answerIdx === null}
                             >
-                    {currentQuestion === questions.length - 1 ? 'Finish' : 'Next'}
+                    Next
                     </button>
                     
                 </div>
                 </>
-                ) : <div className = "result">
+              )
+                ) : ( 
+                <div className = "result">
                     <h3>Result</h3>
                     {result === 'salesforce' ? (
                         <div>
@@ -127,6 +212,7 @@ const Quiz = ({questions}) => {
                     </button>
 
                 </div>
+                )
         
         ):(
             <div className="landing-page">
@@ -135,29 +221,15 @@ const Quiz = ({questions}) => {
                     <p>Click the "Start" button to begin.</p>
                     <button onClick = {onStartQuiz}>Start</button>
                 </div>
-
             )}
-         
-    </div>
+
+        </div>
    
     </div>
-    );
+    )
     
-};
+}
 
 export default Quiz; 
 
-       //{() => {
-                        //     if (currentQuestion === questions.length - 1) {
-                        //     // Handle finishing the quiz
-                        //     setShowResult(true);
-                        //     setCurrentQuestion(0);
-                        //     <div className = "results-page">
-                        //         <h1>Your result is: Salesforce!</h1>
-                        //         <p>Based on your responses, you should create a Salesforce report!</p>
-                        //     </div>
-                        //     } else {
-                        //         setCurrentQuestion(currentQuestion + 1);
-                        //         setAnswerIdx(null);
-                        //     }
-                        //     }}
+      

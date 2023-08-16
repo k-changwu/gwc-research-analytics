@@ -61,11 +61,9 @@ export const jsQuiz = {
                 "Yes", // Tb 
                 "No",
             ], 
-            leadsToResult: "tableau",
-
-      
-            
+            leadsToResult: "tableau",   
         },
+
         
       
     ]
@@ -74,3 +72,61 @@ export const jsQuiz = {
 export const resultInitialState = {
     score: 0,
 }
+
+export const pointBasedQuestions = {
+    questions: [
+        {
+            question: "Does the data need to be joined for additional analysis?",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+
+            ],
+
+        },
+        {
+            question: "Do you need historical data?",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+            ]
+        },
+        {
+            question: "Do you need to continue pulling in data on a regular cadence?",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+            ]
+        },
+        {
+            question: "Do you need the data update monthly or on a more frequent basis?",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+            ]
+        },
+        {
+            question: "How do you want your data formatted? ('Yes': Visualization, 'No': Spreadsheet or report)",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+            ]
+        },
+        {
+            question: "Are you comparing data points?",
+            choices: [
+                {text: "Yes", result: "tableau"},
+                {text: "No", result: "salesforce"},
+            ]
+        },
+        {
+            question: "Will you perform data analysis after this?",
+            choices: [
+                {text: "Yes", result: "salesforce"},
+                {text: "No", result: "tableau"},
+            ]
+        },
+        
+    ]
+
+};
