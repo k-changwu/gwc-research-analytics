@@ -69,9 +69,6 @@ export const jsQuiz = {
     ]
 };
 
-export const resultInitialState = {
-    score: 0,
-}
 
 export const pointBasedQuestions = {
     questions: [

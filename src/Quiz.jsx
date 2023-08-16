@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./index.css";
 import logo from './images/logo-mint.png';
-import { resultInitialState } from "./constants";
 import { jsQuiz} from "./constants";
 import { pointBasedQuestions } from "./constants";
 
@@ -11,30 +10,23 @@ const Quiz = ({questions}) => {
     const[currentQuestion, setCurrentQuestion] = useState(0);
     const {question, choices, leadsToResult, nextQuestionYes, nextQuestionNo} = questions[currentQuestion];
     const [answerIdx, setAnswerIdx] = useState(null); /* answerIndx = index of the choice selected */
-    
     const [quizStarted, setQuizStarted] = useState(false);
+
     const  [result, setResult] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
     const [isPointQuizStarted, setPointQuizStarted] = useState(false);
-    const [pointQuizResult, setPointQuizResult] = useState(null);
+    
     const [pointQuizQuestion, setPointQuizQuestion] = useState(0);
-    const [resultPoints, setResultPoints] = useState({tableau: 0, salesforce: 0});
-
+    
     const [tableauTotalPoints, setTableauPoints] = useState(0);
     const [salesforceTotalPoints, setSalesforcePoints] = useState(0);
 
-    
 
-    const initialResultPoints = {
-        salesforce: 0,
-        tableau: 0,
-    }
  
     const onAnswerClick = (index) => {
         setAnswerIdx(index);
     }
-    
     
     
     const onClickBack = () => {
@@ -54,13 +46,13 @@ const Quiz = ({questions}) => {
     }
 
     const onTryAgain = () => {
-        setResult(resultInitialState);
+        setResult(null);
         setShowResult(false);
         setCurrentQuestion(0);
         setAnswerIdx(null);
-        setResultPoints({tableau: 0, salesforce: 0});
+       
         setPointQuizStarted(false);
-        setPointQuizResult(null);
+        
     }
     
     
@@ -81,7 +73,6 @@ const Quiz = ({questions}) => {
             } else {
                 if (currentQuestion === questions.length - 1) {
                     setPointQuizStarted(true);
-                    setPointQuizResult(null);
                     setPointQuizQuestion(0);
                 } else {
     
@@ -118,8 +109,6 @@ const Quiz = ({questions}) => {
     
         setAnswerIdx(null);
     }
-    
-
 
 
     return  (
@@ -146,11 +135,7 @@ const Quiz = ({questions}) => {
                     ))}
                   </ul>
                   <div className="footer">
-                    {/* {pointQuizQuestion !== 0 && (
-                      <button className="back-button" onClick={onClickBackPoints}>
-                        Back
-                      </button>
-                    )} */}
+            
     
                     <button onClick={onClickNextPointQuiz} disabled={answerIdx === null}>
                       {pointQuizQuestion === pointBasedQuestions.questions.length - 1 ? 'Finish' : 'Next'}
