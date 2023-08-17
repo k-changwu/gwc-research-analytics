@@ -193,16 +193,7 @@ button{
     justify-content: space-between;
 }
 
-.point-quiz .back-button {
-    border-radius: 10px;
-    font-size: 18px;
-    padding: 10px 42px;
-    outline: none;
-    border: none;
-    margin-top: 15px;
-    cursor: pointer;
-    background: #e6e8e9;
-}
+
 
 .point-quiz button {
     border-radius: 10px;
@@ -213,6 +204,7 @@ button{
     margin-top: 15px;
     cursor: pointer;
     background: #6eceb2; 
+    margin-left: auto;
 }
 .point-quiz button:disabled {
     color: #000000;
