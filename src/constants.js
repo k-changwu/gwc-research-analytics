@@ -1,7 +1,7 @@
 export const jsQuiz = {
     questions: [
         {
-            question: "Does the data you requesting originate in Salesforce?", // 1
+            question: "Does the data source originate in Salesforce?", // 1
             choices: [
                 "Yes", // SF 
                 "No",

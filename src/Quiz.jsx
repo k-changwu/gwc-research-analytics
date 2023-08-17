@@ -101,6 +101,8 @@ const Quiz = ({questions}) => {
                 setResult("tableau");
             }else if (tableauTotalPoints < salesforceTotalPoints) {
                 setResult("salesforce");
+            }else if (tableauTotalPoints === salesforceTotalPoints){
+                setResult("salesforce");
             }
             setShowResult(true);
             
