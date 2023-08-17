@@ -103,15 +103,15 @@ export const pointBasedQuestions = {
             ]
         },
         {
-            question: "How do you want your data formatted? ('Yes': Visualization, 'No': Spreadsheet or report)",
+            question: "How do you want your data formatted?",
             choices: [
-                {text: "Yes", result: "tableau"},
-                {text: "No", result: "salesforce"},
+                {text: "Visualization", result: "tableau"},
+                {text: "Spreadsheet or Report", result: "salesforce"},
             ]
         },
         {
             question: "Are you comparing data points?",
-            choices: [
+            choices:[
                 {text: "Yes", result: "tableau"},
                 {text: "No", result: "salesforce"},
             ]
